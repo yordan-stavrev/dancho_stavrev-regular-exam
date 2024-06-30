@@ -9,35 +9,33 @@ on:
 jobs:
   build-and-unit-test:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout the repository
-      uses: actions/checkout@v4
-    
-    - name: Use Node.js version 18x
-      uses: actions/setup-node@v4
-      with:
-        node-version: 18.x
-        cache: 'npm'
-    
-    - name: Install npm dependencies
-      run: npm install
-      
-    - name: Execute unit tests
-      run: npm run test:unit
+      - name: Checkout the repository
+        uses: actions/checkout@v4
 
-    - name: Display softuni username
-      run: echo 'dancho_stavrev'
+      - name: Use Node.js version 18.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18.x
+          cache: 'npm'
+
+      - name: Install npm dependencies
+        run: npm install
+
+      - name: Execute unit tests
+        run: npm run test:unit
+
+      - name: Display softuni username
+        run: echo 'dancho_stavrev'
 
   execute-ui-test:
     needs: build-and-unit-test
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout the repo
         uses: actions/checkout@v4
 
-      - name: Use Node.js version 18x
+      - name: Use Node.js version 18.x
         uses: actions/setup-node@v4
         with:
           node-version: 18.x
@@ -64,4 +62,4 @@ jobs:
         with:
           service-id: ${{ secrets.SERVICE_KEY }}
           api-key: ${{ secrets.RENDER_API_KEY }}
-          wait-for-success: true        
+          wait-for-success: true
